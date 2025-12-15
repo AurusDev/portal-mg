@@ -1,0 +1,22 @@
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+
+# Environment Variables
+.env
+
+# IDEs
+.vscode/
+.idea/
+
+# System
+Thumbs.db
+Desktop.ini
+
+# Render/Deployment - optional, but maybe we want to keep render.yaml
+# render.yaml

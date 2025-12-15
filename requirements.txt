@@ -1,0 +1,8 @@
+Flask
+pandas
+openpyxl
+flask-login
+Werkzeug
+Flask-Mail
+python-dotenv
+gunicorn

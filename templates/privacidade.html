@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Política de Privacidade - Mendonça Galvão Contadores Associados. Saiba como protegemos seus dados pessoais.">
+    <meta name="keywords" content="política de privacidade, LGPD, proteção de dados, mendonça galvão">
+    <meta name="author" content="Núcleo Digital MG">
+
+    <!-- SEO e Open Graph -->
+    <meta property="og:title" content="Política de Privacidade - Mendonça Galvão Contadores">
+    <meta property="og:description" content="Conheça nossas práticas de proteção de dados e privacidade">
+    <meta property="og:type" content="website">
+
+    <title>Política de Privacidade | Mendonça Galvão Contadores Associados</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='img/favicon.svg') }}">
+    <link rel="alternate icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/privacidade.css') }}">
+</head>
+
+<body>
+
+    <!-- ========================================
+         HEADER COM NAVEGAÇÃO
+         ======================================== -->
+    <header class="privacy-header">
+        <div class="privacy-header-content">
+            <a href="{{ url_for('index') }}" class="back-link">
+                ← Voltar para Central de Sistemas
+            </a>
+            <img src="{{ url_for('static', filename='img/logo-mg.png') }}" alt="Logo Mendonça Galvão Contadores"
+                class="privacy-logo">
+        </div>
+    </header>
+
+    <!-- ========================================
+         CONTEÚDO DA POLÍTICA DE PRIVACIDADE
+         ======================================== -->
+    <main class="privacy-content">
+        <div class="privacy-container">
+
+            <h1 class="privacy-title">Política de Privacidade</h1>
+            <p class="privacy-updated">Última atualização: {{ data_atualizacao }}</p>
+
+            <!-- Introdução -->
+            <section class="privacy-section">
+                <h2>1. Introdução</h2>
+                <p>
+                    A <strong>Mendonça Galvão Contadores Associados</strong> ("MG Contadores", "nós" ou "nosso") está
+                    comprometida com a proteção da privacidade e dos dados pessoais de seus colaboradores, clientes e
+                    parceiros. Esta Política de Privacidade descreve como coletamos, usamos, armazenamos e protegemos
+                    suas informações pessoais em conformidade com a Lei Geral de Proteção de Dados (LGPD - Lei nº
+                    13.709/2018) e demais legislações aplicáveis.
+                </p>
+                <p>
+                    Ao utilizar nossos sistemas e plataformas digitais, você concorda com as práticas descritas nesta
+                    política.
+                </p>
+            </section>
+
+            <!-- Dados Coletados -->
+            <section class="privacy-section">
+                <h2>2. Dados Pessoais Coletados</h2>
+                <p>Coletamos as seguintes categorias de dados pessoais:</p>
+
+                <h3>2.1. Dados de Colaboradores</h3>
+                <ul>
+                    <li><strong>Dados de identificação:</strong> nome completo, CPF, RG, data de nascimento, filiação
+                    </li>
+                    <li><strong>Dados de contato:</strong> endereço residencial, telefone, e-mail pessoal e corporativo
+                    </li>
+                    <li><strong>Dados profissionais:</strong> cargo, departamento, data de admissão, histórico de cargos
+                    </li>
+                    <li><strong>Dados financeiros:</strong> informações bancárias, salário, comissões, adiantamentos,
+                        benefícios</li>
+                    <li><strong>Dados de ponto eletrônico:</strong> registros de entrada/saída, horas trabalhadas,
+                        faltas, horas extras</li>
+                    <li><strong>Dados de acesso:</strong> credenciais de login, logs de acesso aos sistemas, endereço IP
+                    </li>
+                </ul>
+
+                <h3>2.2. Dados de Clientes</h3>
+                <ul>
+                    <li><strong>Dados cadastrais:</strong> razão social, CNPJ, endereço, telefone, e-mail</li>
+                    <li><strong>Dados de representantes:</strong> nome, CPF, cargo, contatos</li>
+                    <li><strong>Dados contratuais:</strong> informações sobre serviços contratados, histórico de
+                        atendimento</li>
+                </ul>
+
+                <h3>2.3. Dados de Navegação</h3>
+                <ul>
+                    <li>Endereço IP, tipo de navegador, sistema operacional</li>
+                    <li>Páginas visitadas, tempo de permanência, origem do acesso</li>
+                    <li>Cookies e tecnologias similares (conforme nossa Política de Cookies)</li>
+                </ul>
+            </section>
+
+            <!-- Finalidade do Uso -->
+            <section class="privacy-section">
+                <h2>3. Finalidade do Uso dos Dados</h2>
+                <p>Utilizamos seus dados pessoais para as seguintes finalidades:</p>
+                <ul>
+                    <li><strong>Gestão de recursos humanos:</strong> administração de folha de pagamento, controle de
+                        ponto, gestão de benefícios, férias e licenças</li>
+                    <li><strong>Prestação de serviços contábeis:</strong> execução de obrigações contratuais com
+                        clientes</li>
+                    <li><strong>Cumprimento de obrigações legais:</strong> atendimento a requisitos fiscais,
+                        trabalhistas e regulatórios</li>
+                    <li><strong>Segurança da informação:</strong> proteção dos sistemas, prevenção de fraudes e acessos
+                        não autorizados</li>
+                    <li><strong>Comunicação:</strong> envio de informações relevantes sobre sistemas, políticas e
+                        atualizações</li>
+                    <li><strong>Melhoria dos serviços:</strong> análise de uso dos sistemas para otimização e
+                        desenvolvimento de novas funcionalidades</li>
+                </ul>
+            </section>
+
+            <!-- Base Legal -->
+            <section class="privacy-section">
+                <h2>4. Base Legal para o Tratamento</h2>
+                <p>O tratamento de dados pessoais pela MG Contadores está fundamentado nas seguintes bases legais
+                    previstas na LGPD:</p>
+                <ul>
+                    <li><strong>Execução de contrato:</strong> processamento necessário para cumprimento de obrigações
+                        contratuais (Art. 7º, V)</li>
+                    <li><strong>Obrigação legal:</strong> cumprimento de obrigações fiscais, trabalhistas e regulatórias
+                        (Art. 7º, II)</li>
+                    <li><strong>Legítimo interesse:</strong> segurança dos sistemas, prevenção de fraudes (Art. 7º, IX)
+                    </li>
+                    <li><strong>Consentimento:</strong> quando aplicável, mediante autorização expressa do titular (Art.
+                        7º, I)</li>
+                </ul>
+            </section>
+
+            <!-- Compartilhamento -->
+            <section class="privacy-section">
+                <h2>5. Compartilhamento de Dados</h2>
+                <p>Seus dados pessoais podem ser compartilhados nas seguintes situações:</p>
+                <ul>
+                    <li><strong>Órgãos governamentais:</strong> Receita Federal, Ministério do Trabalho, INSS, quando
+                        exigido por lei</li>
+                    <li><strong>Prestadores de serviços:</strong> fornecedores de tecnologia, processamento de folha,
+                        sistemas de ponto eletrônico (mediante contrato de confidencialidade)</li>
+                    <li><strong>Instituições financeiras:</strong> para processamento de pagamentos e benefícios</li>
+                    <li><strong>Autoridades competentes:</strong> mediante ordem judicial ou requisição legal</li>
+                </ul>
+                <p>
+                    <strong>Importante:</strong> Não vendemos, alugamos ou comercializamos seus dados pessoais com
+                    terceiros para fins de marketing.
+                </p>
+            </section>
+
+            <!-- Armazenamento e Segurança -->
+            <section class="privacy-section">
+                <h2>6. Armazenamento e Segurança</h2>
+
+                <h3>6.1. Medidas de Segurança</h3>
+                <p>Implementamos medidas técnicas e organizacionais para proteger seus dados:</p>
+                <ul>
+                    <li>Criptografia de dados em trânsito e em repouso</li>
+                    <li>Controle de acesso baseado em funções (RBAC)</li>
+                    <li>Autenticação segura e gerenciamento de credenciais</li>
+                    <li>Monitoramento contínuo de segurança e logs de auditoria</li>
+                    <li>Backup regular e plano de recuperação de desastres</li>
+                    <li>Treinamento periódico da equipe sobre proteção de dados</li>
+                </ul>
+
+                <h3>6.2. Período de Retenção</h3>
+                <p>Mantemos seus dados pessoais pelo período necessário para:</p>
+                <ul>
+                    <li><strong>Dados de colaboradores:</strong> durante a vigência do contrato de trabalho e por até 30
+                        anos após o término, conforme legislação trabalhista e previdenciária</li>
+                    <li><strong>Dados de clientes:</strong> durante a vigência do contrato e por até 5 anos após o
+                        término, conforme legislação fiscal</li>
+                    <li><strong>Dados de acesso:</strong> por até 6 meses, para fins de segurança</li>
+                </ul>
+            </section>
+
+            <!-- Direitos dos Titulares -->
+            <section class="privacy-section">
+                <h2>7. Seus Direitos (Direitos dos Titulares)</h2>
+                <p>De acordo com a LGPD, você tem os seguintes direitos em relação aos seus dados pessoais:</p>
+                <ul>
+                    <li><strong>Confirmação e acesso:</strong> confirmar se tratamos seus dados e solicitar acesso a
+                        eles</li>
+                    <li><strong>Correção:</strong> solicitar a correção de dados incompletos, inexatos ou desatualizados
+                    </li>
+                    <li><strong>Anonimização, bloqueio ou eliminação:</strong> solicitar a anonimização, bloqueio ou
+                        eliminação de dados desnecessários ou excessivos</li>
+                    <li><strong>Portabilidade:</strong> solicitar a portabilidade dos dados a outro fornecedor de
+                        serviço</li>
+                    <li><strong>Eliminação:</strong> solicitar a eliminação de dados tratados com base no consentimento
+                    </li>
+                    <li><strong>Informação:</strong> obter informações sobre entidades públicas e privadas com as quais
+                        compartilhamos dados</li>
+                    <li><strong>Revogação do consentimento:</strong> revogar o consentimento a qualquer momento</li>
+                    <li><strong>Oposição:</strong> opor-se ao tratamento realizado com dispensa de consentimento</li>
+                </ul>
+
+                <h3>Como Exercer Seus Direitos</h3>
+                <p>Para exercer qualquer um desses direitos, entre em contato com nosso Encarregado de Proteção de Dados
+                    (DPO):</p>
+                <ul>
+                    <li><strong>E-mail:</strong> <a href="mailto:dpo@mgcontadores.com.br">dpo@mgcontadores.com.br</a>
+                    </li>
+                    <li><strong>Telefone:</strong> (XX) XXXX-XXXX</li>
+                    <li><strong>Endereço:</strong> [Endereço completo da empresa]</li>
+                </ul>
+                <p>Responderemos sua solicitação em até 15 dias úteis.</p>
+            </section>
+
+            <!-- Cookies -->
+            <section class="privacy-section">
+                <h2>8. Cookies e Tecnologias Similares</h2>
+                <p>
+                    Utilizamos cookies e tecnologias similares para melhorar a experiência do usuário, analisar o uso
+                    dos sistemas e garantir a segurança. Você pode gerenciar suas preferências de cookies através das
+                    configurações do seu navegador.
+                </p>
+                <p>
+                    Para mais informações, consulte nossa <a href="#">Política de Cookies</a> (em desenvolvimento).
+                </p>
+            </section>
+
+            <!-- Alterações -->
+            <section class="privacy-section">
+                <h2>9. Alterações nesta Política</h2>
+                <p>
+                    Podemos atualizar esta Política de Privacidade periodicamente para refletir mudanças em nossas
+                    práticas, legislação ou por outros motivos operacionais. Notificaremos sobre alterações
+                    significativas através de nossos canais de comunicação oficiais.
+                </p>
+                <p>
+                    Recomendamos que você revise esta política regularmente para se manter informado sobre como
+                    protegemos seus dados.
+                </p>
+            </section>
+
+            <!-- Contato -->
+            <section class="privacy-section">
+                <h2>10. Contato e Dúvidas</h2>
+                <p>
+                    Se você tiver dúvidas, preocupações ou solicitações relacionadas a esta Política de Privacidade ou
+                    ao tratamento de seus dados pessoais, entre em contato conosco:
+                </p>
+                <div class="contact-info">
+                    <p><strong>Mendonça Galvão Contadores Associados</strong></p>
+                    <p><strong>Encarregado de Proteção de Dados (DPO)</strong></p>
+                    <p>E-mail: <a href="mailto:dpo@mgcontadores.com.br">dpo@mgcontadores.com.br</a></p>
+                    <p>E-mail alternativo: <a href="mailto:suporte@mgcontadores.com.br">suporte@mgcontadores.com.br</a>
+                    </p>
+                    <p>Telefone: (XX) XXXX-XXXX</p>
+                    <p>Endereço: [Endereço completo da empresa]</p>
+                </div>
+            </section>
+
+            <!-- Autoridade Nacional -->
+            <section class="privacy-section">
+                <h2>11. Autoridade Nacional de Proteção de Dados (ANPD)</h2>
+                <p>
+                    Caso suas solicitações não sejam atendidas de forma satisfatória, você tem o direito de apresentar
+                    uma reclamação à Autoridade Nacional de Proteção de Dados (ANPD):
+                </p>
+                <p>
+                    Website: <a href="https://www.gov.br/anpd" target="_blank"
+                        rel="noopener noreferrer">www.gov.br/anpd</a>
+                </p>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- ========================================
+         RODAPÉ
+         ======================================== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-copyright">
+                © {{ ano_atual }} Mendonça Galvão Contadores Associados. Todos os direitos reservados.
+            </p>
+
+            <div class="footer-links">
+                <a href="{{ url_for('index') }}" class="footer-link">Voltar ao Início</a>
+                <a href="mailto:suporte@mgcontadores.com.br" class="footer-link">Suporte Técnico</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+/*
+ * CSS Reset - Normalização básica para consistência entre navegadores
+ * Baseado em modern-normalize e práticas atuais
+ */
+
+/* Box sizing border-box para todos os elementos */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remover margens e paddings padrão */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* Configuração base do HTML */
+html {
+  /* Previne ajuste de fonte em iOS */
+  -webkit-text-size-adjust: 100%;
+  /* Melhora renderização de fontes */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Scroll suave */
+  scroll-behavior: smooth;
+}
+
+/* Body com altura mínima de 100vh */
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* Remover estilos de lista */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Imagens responsivas por padrão */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Remover estilos padrão de inputs e buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remover aparência padrão de botões */
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+/* Links sem decoração padrão */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Melhorar quebra de texto */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/* Remover estilos padrão de fieldset */
+fieldset {
+  border: none;
+}

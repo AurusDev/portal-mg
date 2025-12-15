@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Central de Sistemas - Mendonça Galvão Contadores Associados. Acesse todos os sistemas internos em um só lugar.">
+    <meta name="keywords" content="portal colaborador, sistemas internos, mendonça galvão, contabilidade">
+    <meta name="author" content="Núcleo Digital MG">
+
+    <!-- SEO e Open Graph -->
+    <meta property="og:title" content="Central de Sistemas - Mendonça Galvão Contadores">
+    <meta property="og:description" content="Acesse de forma rápida e segura todas as ferramentas que você precisa">
+    <meta property="og:type" content="website">
+
+    <title>Central de Sistemas | Mendonça Galvão Contadores Associados</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='img/favicon.svg') }}">
+    <link rel="alternate icon" type="image/png" href="{{ url_for('static', filename='img/favicon.png') }}">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+
+
+    <!-- ========================================
+         HERO SECTION
+         ======================================== -->
+    <section class="hero">
+        <div class="hero-content">
+            <!-- Informações do usuário e logout -->
+            {% if current_user.is_authenticated %}
+            <div class="user-info">
+                <span class="user-welcome">Olá, {{ current_user.name }}!</span>
+                <a href="{{ url_for('logout') }}" class="btn-logout">Sair</a>
+            </div>
+            {% endif %}
+
+            <!-- Mensagens Flash -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div class="flash-messages-hero">
+                {% for category, message in messages %}
+                <div class="flash-message flash-{{ category }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+
+            <!-- Logo centralizada acima do título -->
+            <img src="{{ url_for('static', filename='img/logo-mg.png') }}" alt="Logo Mendonça Galvão Contadores"
+                class="hero-logo">
+
+            <!-- CUSTOMIZAÇÃO: Ajuste os textos conforme necessário -->
+            <h2 class="hero-title">Central de Sistemas MG</h2>
+            <p class="hero-subtitle">Acesse de forma rápida e segura todas as ferramentas que você precisa</p>
+            <p class="hero-description">
+                Bem-vindo ao hub central de sistemas da Mendonça Galvão.
+                Aqui você encontra acesso direto a todas as plataformas que facilitam seu trabalho diário.
+            </p>
+        </div>
+    </section>
+
+    <!-- ========================================
+         NAVEGAÇÃO POR ABAS
+         ======================================== -->
+    <section class="tabs-section">
+        <div class="tabs-container">
+            <div class="tabs-nav">
+                <button class="tab-button active" data-tab="sistemas">
+                    <div class="tab-icon-wrapper">
+                        <img src="{{ url_for('static', filename='img/gear-white.png') }}" alt=""
+                            class="tab-icon icon-default">
+                        <img src="{{ url_for('static', filename='img/gear-gold.png') }}" alt=""
+                            class="tab-icon icon-active">
+                    </div>
+                    Sistemas Principais
+                </button>
+                <button class="tab-button" data-tab="automacoes">
+                    <div class="tab-icon-wrapper">
+                        <img src="{{ url_for('static', filename='img/automation-white.png') }}" alt=""
+                            class="tab-icon icon-default">
+                        <img src="{{ url_for('static', filename='img/automation-gold.png') }}" alt=""
+                            class="tab-icon icon-active">
+                    </div>
+                    Automações
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         SISTEMAS PRINCIPAIS (Grid de Cards)
+         ======================================== -->
+    <section class="sistemas-section tab-content active" id="tab-sistemas">
+        <div class="sistemas-container">
+            <div class="sistemas-grid">
+
+                {% for sistema in sistemas %}
+                <!-- Card de Sistema -->
+                <article class="sistema-card">
+                    <!-- CUSTOMIZAÇÃO: Ícones dos sistemas - Substitua pelos ícones reais -->
+                    <img src="{{ url_for('static', filename='img/' + sistema.icone) }}" alt="Ícone {{ sistema.titulo }}"
+                        class="sistema-icon">
+
+                    <h3 class="sistema-titulo">{{ sistema.titulo }}</h3>
+
+                    <p class="sistema-descricao">{{ sistema.descricao }}</p>
+
+                    <!-- Link externo com segurança (target="_blank" + rel="noopener noreferrer") -->
+                    <a href="{{ sistema.url }}" class="btn-cta" target="_blank" rel="noopener noreferrer"
+                        aria-label="Acessar {{ sistema.titulo }} em nova aba">
+                        {{ sistema.cta }}
+                    </a>
+                </article>
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         AUTOMAÇÕES (Grid de Cards)
+         ======================================== -->
+    <section class="sistemas-section tab-content" id="tab-automacoes">
+        <div class="sistemas-container">
+            <div class="sistemas-grid">
+
+                <!-- Placeholder para automações futuras -->
+                <article class="sistema-card">
+                    <div class="sistema-icon-placeholder">⚡</div>
+                    <h3 class="sistema-titulo">Automações em Breve</h3>
+                    <p class="sistema-descricao">
+                        Novas automações serão adicionadas aqui para simplificar ainda mais seu trabalho.
+                    </p>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         NÚCLEO DIGITAL (Seção Destacada)
+         ======================================== -->
+    <section class="nucleo-section">
+        <div class="nucleo-container">
+            <!-- CUSTOMIZAÇÃO: Logo Núcleo Digital - Substitua pela logo real -->
+            <img src="{{ url_for('static', filename='img/logo-nucleo.png') }}" alt="Logo Núcleo Digital"
+                class="nucleo-logo">
+
+            <h2 class="nucleo-titulo">Núcleo Digital</h2>
+
+            <!-- CUSTOMIZAÇÃO: Ajuste a descrição do Núcleo Digital -->
+            <p class="nucleo-descricao">
+                Inovação e tecnologia a serviço da contabilidade moderna.
+                O Núcleo Digital MG desenvolve soluções personalizadas para otimizar processos
+                e aumentar a eficiência da equipe.
+            </p>
+        </div>
+    </section>
+
+    <!-- ========================================
+         EQUIPE (Team Members)
+         ======================================== -->
+    <section class="team-section">
+        <div class="team-container">
+            <h2 class="team-titulo">Nossa Equipe</h2>
+            <p class="team-subtitle">Conheça os desenvolvedores do Núcleo Digital</p>
+
+            <div class="team-grid">
+                {% for member in team_members %}
+                <!-- Card de Membro da Equipe -->
+                <article class="team-card">
+                    <div class="team-photo-wrapper">
+                        <img src="{{ url_for('static', filename='img/' + member.foto) }}"
+                            alt="Foto de {{ member.nome }}" class="team-photo">
+                    </div>
+                    <h3 class="team-name">{{ member.nome }}</h3>
+                    <span class="team-badge">dev &lt;/&gt;</span>
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         RODAPÉ
+         ======================================== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-copyright">
+                © {{ ano_atual }} Mendonça Galvão Contadores Associados. Todos os direitos reservados.
+            </p>
+
+            <!-- CUSTOMIZAÇÃO: Adicione links úteis conforme necessário -->
+
+
+
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <!-- Tabs JavaScript -->
+    <script>
+        // Funcionalidade de troca de abas
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const targetTab = this.getAttribute('data-tab');
+
+                    // Remove active class de todos os botões e conteúdos
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+
+                    // Adiciona active class ao botão clicado
+                    this.classList.add('active');
+
+                    // Mostra o conteúdo correspondente
+                    const targetContent = document.getElementById(`tab-${targetTab}`);
+                    if (targetContent) {
+                        targetContent.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
