@@ -70,6 +70,59 @@ login_manager.login_view = 'login'
 login_manager.login_message = 'Por favor, faça login para acessar esta página.'
 login_manager.login_message_category = 'info'
 
+# --- DATABASE AUTO-INIT FOR PRODUCTION ---
+# Ensure DB is created even if init_db.py wasn't called externally
+with app.app_context():
+    from sqlalchemy import inspect, text
+    try:
+        # Check connection and tables
+        inspector = inspect(db.engine)
+        if not os.path.exists(os.path.join(basedir, 'portal_mg.db')) or 'users' not in inspector.get_table_names():
+            print("Production: Database not found or missing tables. Initializing...")
+            
+            # Create Tables
+            db.create_all()
+            
+            # Run seeding logic (Inline to avoid circular imports with init_db.py)
+            # We can import init_db function if we are careful, or just replicate the seeding here.
+            # Replicating seeding for robustness:
+            from models import System, User, UserSystemAccess
+            
+            # Check if seeding needed
+            if System.query.count() == 0:
+                print("Seeding Systems...")
+                # ... (Systems data) ...
+                systems_data = [
+                    {'id': 'portal-colaborador', 'name': 'Portal do Colaborador', 'description': 'Gerencie suas informações...', 'url': 'https://portalcolabmg.lovable.app/login', 'icon_class': 'icon-portal.png', 'category': 'main', 'is_public': True},
+                    {'id': 'sistema-comissao', 'name': 'Sistema de Cálculo de Comissão', 'description': 'Calcule suas comissões...', 'url': 'https://calculadp.lovable.app/', 'icon_class': 'icon-comissao.png', 'category': 'main', 'is_public': False},
+                    {'id': 'ponto-eletronico', 'name': 'Processamento Ponto', 'description': 'Faça upload dos espelhos...', 'url': 'https://ai.studio/apps/drive/1-7xvcz9OLnLck0vtStQp4u375oKg4MyV?fullscreenApplet=true', 'icon_class': 'icon-ponto.png', 'category': 'automation', 'is_public': False},
+                    {'id': 'adiantamento-salarial', 'name': 'Cálculo Adiantamento', 'description': 'Importe o PDF...', 'url': 'https://ai.studio/apps/drive/14NzWtRjoDQhHhwxaDIeZisxTAzIZDkvq?fullscreenApplet=true', 'icon_class': 'icon-adiantamento.png', 'category': 'automation', 'is_public': False}
+                ]
+                for s in systems_data:
+                    db.session.add(System(id=s['id'], name=s['name'], description=s['description'], url=s['url'], icon_class=s['icon_class'], category=s['category'], is_public=s['is_public']))
+                db.session.commit()
+            
+            # Check Admin
+            ADMIN_EMAIL = "arthur.monteiro@mendoncagalvao.com.br"
+            if not User.query.filter_by(role='admin').first():
+                 print(f"Ensuring Admin: {ADMIN_EMAIL}")
+                 # Try to find user or create
+                 u = User.query.filter_by(email=ADMIN_EMAIL).first()
+                 if u:
+                     u.role = 'admin'
+                 else:
+                     # Create temp admin if not exists (User must change password)
+                     u = User(email=ADMIN_EMAIL, name='Arthur Monteiro', role='admin', is_active=True)
+                     u.password_hash = generate_password_hash('mendonca123') # Temp password
+                     db.session.add(u)
+                 db.session.commit()
+                 
+            print("Production Initialization Complete.")
+    except Exception as e:
+        print(f"Error during production auto-init: {e}")
+# ----------------------------------------
+
+
 @login_manager.user_loader
 def load_user(user_id):
     """Carrega um usuário baseado no ID (PK)"""
