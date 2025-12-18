@@ -73,4 +73,3 @@ class AuditLog(db.Model):
     action = db.Column(db.String(50), nullable=False) # GRANT_ACCESS, REVOKE_ACCESS, etc.
     meta_info = db.Column(db.JSON) # Extra details
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
-

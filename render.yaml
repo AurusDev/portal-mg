@@ -3,7 +3,7 @@ services:
     name: portal-mg
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app
+    startCommand: python init_db.py && gunicorn app:app
     envVars:
       - key: PYTHON_VERSION
         value: 3.10.0
