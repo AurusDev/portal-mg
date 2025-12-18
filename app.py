@@ -36,7 +36,11 @@ app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-production')
 
 # Database Config (SQLite)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///portal_mg.db')
+# Database Config (SQLite)
+basedir = os.path.abspath(os.path.dirname(__file__))
+# Default to SQLite with absolute path if DATABASE_URL not set
+default_db_url = 'sqlite:///' + os.path.join(basedir, 'portal_mg.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', default_db_url)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize DB
@@ -301,7 +305,8 @@ def internal_error(e):
 
 if __name__ == '__main__':
     # Auto-init DB for dev
-    if not os.path.exists('portal_mg.db'):
+    db_file = os.path.join(basedir, 'portal_mg.db')
+    if not os.path.exists(db_file):
         print("Inicializando Banco de Dados...")
         from init_db import init_db
         init_db()

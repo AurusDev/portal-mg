@@ -9,7 +9,23 @@ def init_db():
     
     # Check if DB needs initialization (simple check: any users?)
     with app.app_context():
+        # Debug: Print DB URI
+        db_url = app.config['SQLALCHEMY_DATABASE_URI']
+        print(f"Connecting to database: {db_url}")
+        
         db.create_all()
+        
+        # Verify tables created
+        from sqlalchemy import inspect
+        inspector = inspect(db.engine)
+        tables = inspector.get_table_names()
+        print(f"Tables found: {tables}")
+        
+        if 'users' not in tables:
+            print("CRITICAL ERROR: 'users' table was NOT created.")
+        else:
+            print("'users' table verified.")
+
         
         # 1. Seed Systems
         systems_data = [
