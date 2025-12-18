@@ -7,32 +7,72 @@ import os
 def init_db():
     """Inicializa o banco de dados e migra dados legados"""
     
-    # Check if DB needs initialization (simple check: any users?)
+    # Check if DB needs initialization
     with app.app_context():
-        # Debug: Print DB URI
-        db_url = app.config['SQLALCHEMY_DATABASE_URI']
-        print(f"Connecting to database: {db_url}")
+        # Debug paths
+        basedir = os.path.abspath(os.path.dirname(__file__))
+        db_path = os.path.join(basedir, 'portal_mg.db')
+        print(f"DEBUG: Basedir: {basedir}")
+        print(f"DEBUG: Internal DB Path should be: {db_path}")
+        print(f"DEBUG: App Config URI: {app.config['SQLALCHEMY_DATABASE_URI']}")
         
-        # FORCE creation of tables before any query logic
+        # 1. Try generic create_all
         try:
             db.create_all()
-            print("db.create_all() executed.")
+            print("db.create_all() executed successfully.")
         except Exception as e:
-            print(f"Error creating tables: {e}")
-            
-        # Verify tables created
-        from sqlalchemy import inspect
+            print(f"ERROR in db.create_all(): {e}")
+
+        # 2. Manual Verification & Fallback
+        from sqlalchemy import inspect, text
         try:
             inspector = inspect(db.engine)
             tables = inspector.get_table_names()
-            print(f"Tables found: {tables}")
+            print(f"Tables found after create_all: {tables}")
             
             if 'users' not in tables:
-                print("CRITICAL ERROR: 'users' table was NOT created.")
-                # Force retry?
-                db.create_all()
+                print("WARNING: 'users' table missing. Attempting manual SQL creation...")
+                # Fallback: Create specifically the users table via raw SQL if Alchemy failed
+                with db.engine.connect() as conn:
+                    conn.execute(text('''
+                        CREATE TABLE IF NOT EXISTS users (
+                            id INTEGER PRIMARY KEY,
+                            email VARCHAR(120) NOT NULL UNIQUE,
+                            name VARCHAR(100) NOT NULL,
+                            password_hash VARCHAR(256),
+                            role VARCHAR(20) DEFAULT 'user',
+                            is_active BOOLEAN DEFAULT 1,
+                            created_at DATETIME
+                        )
+                    '''))
+                    conn.execute(text('''
+                        CREATE TABLE IF NOT EXISTS systems (
+                            id VARCHAR(50) PRIMARY KEY,
+                            name VARCHAR(100) NOT NULL,
+                            description VARCHAR(200),
+                            category VARCHAR(20) DEFAULT 'main',
+                            url VARCHAR(200) NOT NULL,
+                            icon_class VARCHAR(50),
+                            is_public BOOLEAN DEFAULT 0
+                        )
+                    '''))
+                    # Also Access Table
+                    conn.execute(text('''
+                        CREATE TABLE IF NOT EXISTS user_system_access (
+                            user_id INTEGER,
+                            system_id VARCHAR(50),
+                            granted_by INTEGER,
+                            granted_at DATETIME,
+                            PRIMARY KEY (user_id, system_id),
+                            FOREIGN KEY(user_id) REFERENCES users(id),
+                            FOREIGN KEY(system_id) REFERENCES systems(id)
+                        )
+                    '''))
+                    conn.commit()
+                print("Manual SQL creation executed.")
         except Exception as e:
-            print(f"Error inspecting tables: {e}")
+            print(f"CRITICAL ERROR inspecting/creating tables manually: {e}")
+
 
         
         # 1. Seed Systems
