@@ -1,0 +1,54 @@
+{% extends "admin/layout.html" %}
+
+{% block content %}
+<div style="display: flex; gap: 1rem; margin-bottom: 2rem;">
+    <!-- Stat Card 1 -->
+    <div class="admin-card" style="flex: 1; text-align: center;">
+        <h3 style="color: var(--text-secondary); font-size: 0.9rem;">Total de Usuários</h3>
+        <p style="font-size: 2.5rem; font-weight: 700; color: var(--text-primary); margin: 0.5rem 0;">{{
+            stats.users_count }}</p>
+    </div>
+    <!-- Stat Card 2 -->
+    <div class="admin-card" style="flex: 1; text-align: center;">
+        <h3 style="color: var(--text-secondary); font-size: 0.9rem;">Usuários Ativos</h3>
+        <p style="font-size: 2.5rem; font-weight: 700; color: var(--color-success); margin: 0.5rem 0;">{{
+            stats.active_users }}</p>
+    </div>
+    <!-- Stat Card 3 -->
+    <div class="admin-card" style="flex: 1; text-align: center;">
+        <h3 style="color: var(--text-secondary); font-size: 0.9rem;">Sistemas</h3>
+        <p style="font-size: 2.5rem; font-weight: 700; color: var(--accent-yellow); margin: 0.5rem 0;">{{
+            stats.systems_count }}</p>
+    </div>
+</div>
+
+<div class="admin-card">
+    <h2 style="margin-bottom: 1rem; color: var(--text-primary);">Auditoria Recente</h2>
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Quem</th>
+                <th>Ação</th>
+                <th>Alvo</th>
+                <th>Detalhes</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in logs %}
+            <tr>
+                <td style="color: var(--text-secondary);">{{ log.created_at.strftime('%d/%m %H:%M') }}</td>
+                <td>Usuario #{{ log.actor_id }}</td>
+                <td><span class="badge" style="background: #333;">{{ log.action }}</span></td>
+                <td>{{ log.target_id }}</td>
+                <td style="font-size: 0.8rem; color: var(--text-muted);">{{ log.meta_info }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5" style="text-align: center;">Nenhum registro encontrado.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

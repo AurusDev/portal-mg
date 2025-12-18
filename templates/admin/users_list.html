@@ -1,0 +1,48 @@
+{% extends "admin/layout.html" %}
+
+{% block content %}
+<div class="admin-card">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <h2>Gestão de Usuários</h2>
+        <form action="{{ url_for('admin.list_users') }}" method="get" style="display: flex; gap: 0.5rem;">
+            <input type="text" name="search" value="{{ search }}" placeholder="Buscar por nome ou email..."
+                style="background: #333; border: 1px solid #444; color: white; padding: 0.5rem; border-radius: 4px;">
+            <button type="submit" class="btn-sm btn-primary">Buscar</button>
+        </form>
+    </div>
+
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Perfil</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.name }}</td>
+                <td style="color: var(--text-secondary);">{{ user.email }}</td>
+                <td>
+                    <span class="badge badge-{{ user.role }}">{{ user.role|upper }}</span>
+                </td>
+                <td>
+                    {% if user.is_active %}
+                    <span style="color: var(--color-success);">● Ativo</span>
+                    {% else %}
+                    <span style="color: var(--color-error);">● Inativo</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ url_for('admin.user_permissions', user_id=user.id) }}"
+                        class="btn-sm btn-secondary">Gerenciar Permissões</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

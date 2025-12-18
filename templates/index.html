@@ -37,6 +37,10 @@
             {% if current_user.is_authenticated %}
             <div class="user-info">
                 <span class="user-welcome">Olá, {{ current_user.name }}!</span>
+                {% if current_user.role in ['admin', 'manager'] %}
+                <a href="{{ url_for('admin.dashboard') }}" class="btn-logout"
+                    style="background: rgba(251, 191, 36, 0.2); color: #fbbf24; border-color: #fbbf24; margin-right: 0.5rem;">Admin</a>
+                {% endif %}
                 <a href="{{ url_for('logout') }}" class="btn-logout">Sair</a>
             </div>
             {% endif %}
@@ -103,7 +107,7 @@
         <div class="sistemas-container">
             <div class="sistemas-grid">
 
-                {% for sistema in sistemas %}
+                {% for sistema in sistemas if sistema.category == 'main' %}
                 <!-- Card de Sistema -->
                 <article class="sistema-card">
                     <!-- CUSTOMIZAÇÃO: Ícones dos sistemas - Substitua pelos ícones reais -->
@@ -120,6 +124,9 @@
                         {{ sistema.cta }}
                     </a>
                 </article>
+                {% else %}
+                <p style="color: #666; grid-column: span 2; text-align: center;">Nenhum sistema principal disponível.
+                </p>
                 {% endfor %}
 
             </div>
@@ -133,14 +140,26 @@
         <div class="sistemas-container">
             <div class="sistemas-grid">
 
-                <!-- Placeholder para automações futuras -->
+                {% for sistema in sistemas if sistema.category == 'automation' %}
                 <article class="sistema-card">
-                    <div class="sistema-icon-placeholder">⚡</div>
-                    <h3 class="sistema-titulo">Automações em Breve</h3>
+                    <img src="{{ url_for('static', filename='img/' + sistema.icone) }}" alt="Ícone {{ sistema.titulo }}"
+                        class="sistema-icon">
+                    <h3 class="sistema-titulo">{{ sistema.titulo }}</h3>
+                    <p class="sistema-descricao">{{ sistema.descricao }}</p>
+                    <a href="{{ sistema.url }}" class="btn-cta" target="_blank" rel="noopener noreferrer">
+                        {{ sistema.cta }}
+                    </a>
+                </article>
+                {% else %}
+                <!-- Placeholder se não houver automações liberadas -->
+                <article class="sistema-card">
+                    <div class="sistema-icon-placeholder" style="color: var(--text-muted);">🔒</div>
+                    <h3 class="sistema-titulo">Acesso Restrito</h3>
                     <p class="sistema-descricao">
-                        Novas automações serão adicionadas aqui para simplificar ainda mais seu trabalho.
+                        Você ainda não tem acesso às automações. Se necessário, solicite acesso à equipe administrativa.
                     </p>
                 </article>
+                {% endfor %}
 
             </div>
         </div>
