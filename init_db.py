@@ -12,9 +12,14 @@ def init_db():
         # Debug paths
         basedir = os.path.abspath(os.path.dirname(__file__))
         db_path = os.path.join(basedir, 'portal_mg.db')
+        print(f"DEBUG: CWD: {os.getcwd()}")
         print(f"DEBUG: Basedir: {basedir}")
         print(f"DEBUG: Internal DB Path should be: {db_path}")
         print(f"DEBUG: App Config URI: {app.config['SQLALCHEMY_DATABASE_URI']}")
+        
+        import sqlite3
+        print(f"DEBUG: SQLite Version: {sqlite3.sqlite_version}")
+
         
         # 1. Try generic create_all
         try:
