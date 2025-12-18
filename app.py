@@ -102,20 +102,51 @@ with app.app_context():
                     db.session.add(System(id=s['id'], name=s['name'], description=s['description'], url=s['url'], icon_class=s['icon_class'], category=s['category'], is_public=s['is_public']))
                 db.session.commit()
             
-            # Check Admin
-            ADMIN_EMAIL = "arthur.monteiro@mendoncagalvao.com.br"
-            if not User.query.filter_by(role='admin').first():
-                 print(f"Ensuring Admin: {ADMIN_EMAIL}")
-                 # Try to find user or create
-                 u = User.query.filter_by(email=ADMIN_EMAIL).first()
-                 if u:
-                     u.role = 'admin'
-                 else:
-                     # Create temp admin if not exists (User must change password)
-                     u = User(email=ADMIN_EMAIL, name='Arthur Monteiro', role='admin', is_active=True)
-                     u.password_hash = generate_password_hash('mendonca123') # Temp password
-                     db.session.add(u)
-                 db.session.commit()
+            # 3. Migrate Users from JSON (Restore original passwords)
+            try:
+                import json
+                users_file = os.path.join(basedir, 'users.json')
+                if os.path.exists(users_file):
+                    with open(users_file, 'r', encoding='utf-8') as f:
+                        data = json.load(f)
+                        legacy_users = data.get('users', [])
+                        
+                    ADMIN_EMAILS = ["admin@mendoncagalvao.com.br", "arthur.monteiro@mendoncagalvao.com.br"]
+                    
+                    for u_data in legacy_users:
+                        email = u_data['email']
+                        existing = User.query.filter_by(email=email).first()
+                        
+                        target_role = 'admin' if email in ADMIN_EMAILS else 'user'
+                        
+                        if not existing:
+                            print(f"Migrating user: {email}")
+                            new_u = User(
+                                email=email,
+                                name=u_data['name'],
+                                password_hash=u_data.get('password_hash', ''), # KEEP ORIGINAL HASH
+                                role=target_role,
+                                is_active=True,
+                                created_at=datetime.utcnow()
+                            )
+                            db.session.add(new_u)
+                            
+                            # Grant access to all systems for legacy users
+                            systems = System.query.all()
+                            for s in systems:
+                                db.session.add(UserSystemAccess(user_id=new_u.id, system_id=s.id))
+                        else:
+                            # Update role if needed
+                            if existing.role != target_role and target_role == 'admin':
+                                existing.role = 'admin'
+                                db.session.add(existing)
+
+                    db.session.commit()
+                else:
+                    print("users.json not found inside app context.")
+            except Exception as e:
+                print(f"Error migrating users in app.py: {e}")
+
                  
             print("Production Initialization Complete.")
     except Exception as e:
