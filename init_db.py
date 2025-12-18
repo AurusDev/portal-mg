@@ -13,18 +13,26 @@ def init_db():
         db_url = app.config['SQLALCHEMY_DATABASE_URI']
         print(f"Connecting to database: {db_url}")
         
-        db.create_all()
-        
+        # FORCE creation of tables before any query logic
+        try:
+            db.create_all()
+            print("db.create_all() executed.")
+        except Exception as e:
+            print(f"Error creating tables: {e}")
+            
         # Verify tables created
         from sqlalchemy import inspect
-        inspector = inspect(db.engine)
-        tables = inspector.get_table_names()
-        print(f"Tables found: {tables}")
-        
-        if 'users' not in tables:
-            print("CRITICAL ERROR: 'users' table was NOT created.")
-        else:
-            print("'users' table verified.")
+        try:
+            inspector = inspect(db.engine)
+            tables = inspector.get_table_names()
+            print(f"Tables found: {tables}")
+            
+            if 'users' not in tables:
+                print("CRITICAL ERROR: 'users' table was NOT created.")
+                # Force retry?
+                db.create_all()
+        except Exception as e:
+            print(f"Error inspecting tables: {e}")
 
         
         # 1. Seed Systems
@@ -87,22 +95,31 @@ def init_db():
         # 2. Migrate Users from JSON
         legacy_users = load_legacy_users() # Returns list of dicts
         
-        # Default Admin Email (for bootstrapping)
-        ADMIN_EMAIL = "admin@mendoncagalvao.com.br" # Replace with real one if known, or auto-detect
+        # Admin Emails
+        ADMIN_EMAILS = ["admin@mendoncagalvao.com.br", "arthur.monteiro@mendoncagalvao.com.br"] # Explicitly add Arthur
         
         for u_data in legacy_users:
             email = u_data['email']
             existing_user = User.query.filter_by(email=email).first()
             
+            # Determine correct role
+            target_role = 'admin' if email in ADMIN_EMAILS else 'user'
+            
+            if existing_user:
+                 # Check if we need to promote existing user
+                 if existing_user.role != target_role and target_role == 'admin':
+                     print(f"Promovendo usuário existente para admin: {email}")
+                     existing_user.role = 'admin'
+                     db.session.add(existing_user) # Mark for update
+
             if not existing_user:
                 print(f"Migrando usuário: {email}")
-                role = 'admin' if email == ADMIN_EMAIL else 'user'
                 
                 new_user = User(
                     email=email,
                     name=u_data['name'],
                     password_hash=u_data.get('password_hash', ''),
-                    role=role,
+                    role=target_role,
                     is_active=True,
                     created_at=datetime.fromisoformat(u_data['created_at']) if 'created_at' in u_data else datetime.utcnow()
                 )
