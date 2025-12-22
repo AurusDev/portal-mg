@@ -117,6 +117,24 @@ def init_db():
                 'icon_class': 'icon-adiantamento.png',
                 'category': 'automation',
                 'is_public': False
+            },
+            {
+                'id': 'grid-x',
+                'name': 'GridX',
+                'description': 'Seu conversor inteligente para Windows. Transforme dados em insights de forma rápida, simples e eficiente.',
+                'url': 'https://gridx.lovable.app/',
+                'icon_class': 'icon-gridx.png',
+                'category': 'main',
+                'is_public': True
+            },
+            {
+                'id': 'arca-mg',
+                'name': 'Arca MG',
+                'description': 'Analisador de Documentos. Envie seus arquivos Excel e PDF para análise inteligente e correlação de dados.',
+                'url': 'https://arcamg.lovable.app/',
+                'icon_class': 'icon-arca.png',
+                'category': 'main',
+                'is_public': True
             }
         ]
         
