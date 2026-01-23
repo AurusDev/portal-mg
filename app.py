@@ -98,7 +98,9 @@ with app.app_context():
                     {'id': 'ponto-eletronico', 'name': 'Processamento Ponto', 'description': 'Faça upload dos espelhos...', 'url': 'https://ai.studio/apps/drive/1-7xvcz9OLnLck0vtStQp4u375oKg4MyV?fullscreenApplet=true', 'icon_class': 'icon-ponto.png', 'category': 'automation', 'is_public': False},
                     {'id': 'adiantamento-salarial', 'name': 'Cálculo Adiantamento', 'description': 'Importe o PDF...', 'url': 'https://ai.studio/apps/drive/14NzWtRjoDQhHhwxaDIeZisxTAzIZDkvq?fullscreenApplet=true', 'icon_class': 'icon-adiantamento.png', 'category': 'automation', 'is_public': False},
                     {'id': 'grid-x', 'name': 'GridX', 'description': 'Seu conversor inteligente para Windows...', 'url': 'https://gridx.lovable.app/', 'icon_class': 'icon-gridx.png', 'category': 'main', 'is_public': True},
-                    {'id': 'arca-mg', 'name': 'Arca MG', 'description': 'Analisador de Documentos...', 'url': 'https://arcamg.lovable.app/', 'icon_class': 'icon-arca.png', 'category': 'main', 'is_public': True}
+                    {'id': 'arca-mg', 'name': 'Arca MG', 'description': 'Analisador de Documentos...', 'url': 'https://arcamg.lovable.app/', 'icon_class': 'icon-arca.png', 'category': 'main', 'is_public': True},
+                    {'id': 'aeronord-convocacoes', 'name': 'Aeronord - Convocações & Recibos', 'description': 'Sistema interno para cálculo automático de convocações...', 'url': 'https://aerocv.lovable.app/convenios', 'icon_class': 'icon-aeronord.png', 'category': 'main', 'is_public': True},
+                    {'id': 'calculadora-rescisao', 'name': 'Calculadora de Rescisão', 'description': 'Ferramenta automática para cálculo de rescisão trabalhista com interface intuitiva e cálculos precisos', 'url': 'https://calculadoramg.lovable.app/', 'icon_class': 'icon-rescisao.png', 'category': 'main', 'is_public': True}
                 ]
                 for s in systems_data:
                     db.session.add(System(id=s['id'], name=s['name'], description=s['description'], url=s['url'], icon_class=s['icon_class'], category=s['category'], is_public=s['is_public']))

@@ -135,6 +135,24 @@ def init_db():
                 'icon_class': 'icon-arca.png',
                 'category': 'main',
                 'is_public': True
+            },
+            {
+                'id': 'aeronord-convocacoes',
+                'name': 'Aeronord - Convocações & Recibos',
+                'description': 'Sistema interno para cálculo automático de convocações e geração de recibos da Aeronord, com interface dark premium, apuração mensal consolidada',
+                'url': 'https://aerocv.lovable.app/convenios',
+                'icon_class': 'icon-aeronord.png',
+                'category': 'main',
+                'is_public': True
+            },
+            {
+                'id': 'calculadora-rescisao',
+                'name': 'Calculadora de Rescisão',
+                'description': 'Ferramenta automática para cálculo de rescisão trabalhista com interface intuitiva e cálculos precisos',
+                'url': 'https://calculadoramg.lovable.app/',
+                'icon_class': 'icon-rescisao.png',
+                'category': 'main',
+                'is_public': True
             }
         ]
         
