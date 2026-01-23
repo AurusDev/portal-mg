@@ -99,7 +99,7 @@ with app.app_context():
                     {'id': 'adiantamento-salarial', 'name': 'Cálculo Adiantamento', 'description': 'Importe o PDF...', 'url': 'https://ai.studio/apps/drive/14NzWtRjoDQhHhwxaDIeZisxTAzIZDkvq?fullscreenApplet=true', 'icon_class': 'icon-adiantamento.png', 'category': 'automation', 'is_public': False},
                     {'id': 'grid-x', 'name': 'GridX', 'description': 'Seu conversor inteligente para Windows...', 'url': 'https://gridx.lovable.app/', 'icon_class': 'icon-gridx.png', 'category': 'main', 'is_public': True},
                     {'id': 'arca-mg', 'name': 'Arca MG', 'description': 'Analisador de Documentos...', 'url': 'https://arcamg.lovable.app/', 'icon_class': 'icon-arca.png', 'category': 'main', 'is_public': True},
-                    {'id': 'aeronord-convocacoes', 'name': 'Aeronord - Convocações & Recibos', 'description': 'Sistema interno para cálculo automático de convocações...', 'url': 'https://aerocv.lovable.app/convenios', 'icon_class': 'icon-aeronord.png', 'category': 'main', 'is_public': True},
+                    {'id': 'aeronord-convocacoes', 'name': 'Aeronord - Convocações & Recibos', 'description': 'Sistema interno para cálculo automático de convocações...', 'url': 'https://nordcv.lovable.app/cv', 'icon_class': 'icon-aeronord.png', 'category': 'main', 'is_public': True},
                     {'id': 'calculadora-rescisao', 'name': 'Calculadora de Rescisão', 'description': 'Ferramenta automática para cálculo de rescisão trabalhista com interface intuitiva e cálculos precisos', 'url': 'https://calculadoramg.lovable.app/', 'icon_class': 'icon-rescisao.png', 'category': 'main', 'is_public': True}
                 ]
                 for s in systems_data:

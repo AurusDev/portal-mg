@@ -140,7 +140,7 @@ def init_db():
                 'id': 'aeronord-convocacoes',
                 'name': 'Aeronord - Convocações & Recibos',
                 'description': 'Sistema interno para cálculo automático de convocações e geração de recibos da Aeronord, com interface dark premium, apuração mensal consolidada',
-                'url': 'https://aerocv.lovable.app/convenios',
+                'url': 'https://nordcv.lovable.app/cv',
                 'icon_class': 'icon-aeronord.png',
                 'category': 'main',
                 'is_public': True
