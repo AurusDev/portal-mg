@@ -104,7 +104,7 @@ def init_db():
                 'id': 'ponto-eletronico',
                 'name': 'Processamento Inteligente de Ponto Eletrônico',
                 'description': 'Faça upload dos espelhos de ponto (PDF ou Imagem). O sistema identifica automaticamente faltas (integrais e parciais), horas extras e adicional noturno.',
-                'url': 'https://ai.studio/apps/drive/1-7xvcz9OLnLck0vtStQp4u375oKg4MyV?fullscreenApplet=true',
+                'url': 'https://ai.studio/apps/drive/1g4DXIeeEt42F_J29UEPp15DgEww1PkuM?fullscreenApplet=true',
                 'icon_class': 'icon-ponto.png',
                 'category': 'automation',
                 'is_public': False
